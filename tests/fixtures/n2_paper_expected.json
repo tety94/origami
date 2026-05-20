@@ -1,0 +1,7 @@
+{
+  "n": 2,
+  "angles_deg": [100.0, 80.0, 100.0, 80.0],
+  "kappa_deg": 20.0,
+  "delta_deg": [-10.0, 10.0, -10.0, 10.0],
+  "clipping_needed": false
+}

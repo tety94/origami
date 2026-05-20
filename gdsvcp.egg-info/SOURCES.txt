@@ -1,0 +1,15 @@
+pyproject.toml
+gdsvcp/__init.py__.py
+gdsvcp/cli.py
+gdsvcp/clipping.py
+gdsvcp/core.py
+gdsvcp/io.py
+gdsvcp/l2.py
+gdsvcp/norms.py
+gdsvcp/plotting.py
+gdsvcp.egg-info/PKG-INFO
+gdsvcp.egg-info/SOURCES.txt
+gdsvcp.egg-info/dependency_links.txt
+gdsvcp.egg-info/entry_points.txt
+gdsvcp.egg-info/requires.txt
+gdsvcp.egg-info/top_level.txt
