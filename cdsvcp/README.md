@@ -1,0 +1,130 @@
+# cdsvcp — Combinatorial Edit Distance for Single-Vertex Crease Patterns
+
+Implementation of the **TwoInsert** algorithm from:
+
+> Callegaro, S. *"Two Creases Suffice: Edit Distance to Flat Foldability
+> at a Single Vertex."* (2025).
+
+## Overview
+
+A **single-vertex crease pattern** (SVCP) is a cyclic sequence of positive
+sector angles summing to 2π.  It is *locally flat-foldable* if and only if
+it has an even number of creases and the **Kawasaki deficit** κ(C) = S_odd − π
+equals zero (Kawasaki–Justin theorem).
+
+This package computes the **combinatorial edit distance** dC(C, F) — the
+minimum number of elementary crease insertions/deletions needed to reach the
+flat-foldable set — and constructs an optimal repaired pattern via the O(m)
+algorithm `TwoInsert`.
+
+**Main theorem:** dC(C, F) ∈ {0, 1, 2} for every SVCP:
+| Crease count | Condition | dC |
+|---|---|---|
+| even (m = 2n) | κ(C) = 0 | 0 |
+| odd (m ≥ 3) | always | 1 |
+| even (m = 2n) | κ(C) ≠ 0 | 2 |
+
+All angles are stored as `fractions.Fraction` multiples of π for exact
+arithmetic.
+
+---
+
+## Installation
+
+```bash
+pip install -e .
+```
+
+Requires Python ≥ 3.10.
+
+---
+
+## Quick start
+
+```python
+from fractions import Fraction
+from cdsvcp import SVCP, edit_distance, repair
+
+# Angles in units of π:  Fraction(1,2) = 90°,  Fraction(1) = 180°
+C = SVCP((Fraction(2,3), Fraction(4,9), Fraction(5,9), Fraction(1,3)))
+# = (120°, 80°, 100°, 60°)
+
+print(edit_distance(C))   # → 2
+
+C_star, ops = repair(C)
+print(C_star)             # flat-foldable pattern
+for op in ops:
+    print(op)
+```
+
+---
+
+## Command-line interface
+
+```bash
+# Angles as fractions of π (1/2 = 90°, sum must equal 2)
+
+# Already flat-foldable:
+cdsvcp 1/2 1/2 1/2 1/2
+
+# Odd crease count → dC = 1:
+cdsvcp 2/3 5/9 7/9
+
+# Even, κ ≠ 0  → dC = 2  (with repair):
+cdsvcp 2/3 4/9 5/9 1/3 --repair
+
+# Verbose output (shows S_odd, S_even, κ):
+cdsvcp 2/3 4/9 5/9 1/3 --verbose --repair
+```
+
+---
+
+## Package structure
+
+```
+cdsvcp/
+├── cdsvcp/
+│   ├── __init__.py      public API
+│   ├── svcp.py          SVCP, Mod-C ops, TwoInsert, single_insert, repair
+│   └── cli.py           command-line interface
+├── tests/
+│   └── test_cdsvcp.py   full test suite (all paper cases + regression)
+├── examples/
+│   └── examples.py      worked examples from the paper
+├── outputs/
+│   └── images/          (visualisation outputs, populated by examples.py)
+├── pyproject.toml
+└── README.md
+```
+
+---
+
+## Algorithm cases
+
+`TwoInsert` dispatches on four mutually exclusive cases (all inputs with
+even m and κ > 0):
+
+| Case | Condition | Operations |
+|---|---|---|
+| 1 | n = 1 | 2 insertions |
+| 2 | n ≥ 2, M > κ | 2 insertions (adjacent odd+even sectors) |
+| 3 | n ≥ 3, M = κ | 1 deletion + 1 insertion |
+| 2b | n ≥ 3, M < κ | 2 insertions (non-adjacent) |
+
+where M = max odd-indexed sector angle.
+
+---
+
+## Relation to gdsvcp
+
+The companion package `gdsvcp` in this repository computes the **geometric**
+edit distance under the L² metric.  `cdsvcp` computes the **combinatorial**
+edit distance, which counts only the number of operations regardless of
+the angular magnitude of each change.  The two distances address
+complementary aspects of crease-pattern repair.
+
+---
+
+## License
+
+See `LICENSE`.
