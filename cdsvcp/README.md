@@ -3,7 +3,7 @@
 Implementation of the **TwoInsert** algorithm from:
 
 > Callegaro, S. *"Two Creases Suffice: Edit Distance to Flat Foldability
-> at a Single Vertex."* (2025).
+> at a Single Vertex."* (2026).
 
 ## Overview
 
@@ -12,20 +12,12 @@ sector angles summing to 2π.  It is *locally flat-foldable* if and only if
 it has an even number of creases and the **Kawasaki deficit** κ(C) = S_odd − π
 equals zero (Kawasaki–Justin theorem).
 
-This package computes the **combinatorial edit distance** dC(C, F) — the
+This package computes the **combinatorial edit distance** dC(C, F) for a vertex — the
 minimum number of elementary crease insertions/deletions needed to reach the
 flat-foldable set — and constructs an optimal repaired pattern via the O(m)
 algorithm `TwoInsert`.
 
 **Main theorem:** dC(C, F) ∈ {0, 1, 2} for every SVCP:
-| Crease count | Condition | dC |
-|---|---|---|
-| even (m = 2n) | κ(C) = 0 | 0 |
-| odd (m ≥ 3) | always | 1 |
-| even (m = 2n) | κ(C) ≠ 0 | 2 |
-
-All angles are stored as `fractions.Fraction` multiples of π for exact
-arithmetic.
 
 ---
 
@@ -112,16 +104,6 @@ even m and κ > 0):
 | 2b | n ≥ 3, M < κ | 2 insertions (non-adjacent) |
 
 where M = max odd-indexed sector angle.
-
----
-
-## Relation to gdsvcp
-
-The companion package `gdsvcp` in this repository computes the **geometric**
-edit distance under the L² metric.  `cdsvcp` computes the **combinatorial**
-edit distance, which counts only the number of operations regardless of
-the angular magnitude of each change.  The two distances address
-complementary aspects of crease-pattern repair.
 
 ---
 
