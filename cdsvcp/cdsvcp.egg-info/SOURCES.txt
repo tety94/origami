@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+cdsvcp/__init__.py
+cdsvcp/cli.py
+cdsvcp/svcp.py
+cdsvcp.egg-info/PKG-INFO
+cdsvcp.egg-info/SOURCES.txt
+cdsvcp.egg-info/dependency_links.txt
+cdsvcp.egg-info/entry_points.txt
+cdsvcp.egg-info/requires.txt
+cdsvcp.egg-info/top_level.txt
+tests/test_cdsvcp.py

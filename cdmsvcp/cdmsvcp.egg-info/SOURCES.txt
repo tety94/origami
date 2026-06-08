@@ -1,0 +1,13 @@
+LICENSE
+README.md
+pyproject.toml
+cdmsvcp/__init__.py
+cdmsvcp/cli.py
+cdmsvcp/lsvcp.py
+cdmsvcp.egg-info/PKG-INFO
+cdmsvcp.egg-info/SOURCES.txt
+cdmsvcp.egg-info/dependency_links.txt
+cdmsvcp.egg-info/entry_points.txt
+cdmsvcp.egg-info/requires.txt
+cdmsvcp.egg-info/top_level.txt
+tests/test_cdmsvcp.py

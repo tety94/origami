@@ -1,0 +1,8 @@
+cdsvcp
+pytest>=9.0
+
+[dev]
+pytest>=7.0
+
+[plots]
+matplotlib>=3.7

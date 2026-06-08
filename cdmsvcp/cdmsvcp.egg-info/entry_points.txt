@@ -1,0 +1,2 @@
+[console_scripts]
+cdmsvcp = cdmsvcp.cli:main
